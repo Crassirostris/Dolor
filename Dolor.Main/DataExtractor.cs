@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using OfficeOpenXml;
@@ -17,7 +17,7 @@ namespace Dolor.Main
 					var factorName = "";
 					for (int i = 7; i <= sheet.Cells.Rows && sheet.Cells.Offset(i, 0).Any(); i++)
 					{
-						if (!sheet.Name.StartsWith("Ïàöèåíò"))
+						if (!sheet.Name.StartsWith("ÐŸÐ°Ñ†Ð¸ÐµÐ½Ñ‚"))
 							continue;
 						var row = sheet.Cells[sheet.Cells[i, 1, i, 3].Address];
 						var rowValues = row.Select(cell => cell.GetValue<string>()).ToList();
