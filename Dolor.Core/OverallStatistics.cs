@@ -5,7 +5,7 @@ using MathNet.Numerics.Statistics;
 
 namespace Dolor.Core
 {
-    public class Series
+    public class OverallStatistics
     {
         public Dictionary<string, Tuple<Parameter, Parameter>> Parameters { get; private set; }
 
@@ -13,7 +13,7 @@ namespace Dolor.Core
 
         public Dictionary<string, double[]> Spearman { get; private set; }
 
-        public Series(Dictionary<string, Tuple<double[][], double[][]>> parametersValues)
+        public OverallStatistics(Dictionary<string, Tuple<double[][], double[][]>> parametersValues)
         {
             Parameters = new Dictionary<string, Tuple<Parameter, Parameter>>();
             Pearson = new Dictionary<string, double[]>();

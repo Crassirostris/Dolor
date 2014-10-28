@@ -4,7 +4,7 @@ using MathNet.Numerics.Statistics;
 
 namespace Dolor.Core
 {
-    public class StatisticsInformation
+    public class DataRowStatistics
     {
         public double[] Values { get; private set; }
 
@@ -12,7 +12,7 @@ namespace Dolor.Core
 
         public double Variance { get; private set; }
 
-        public StatisticsInformation(IEnumerable<double> values)
+        public DataRowStatistics(IEnumerable<double> values)
         {
             Values = values.ToArray();
             Mean = Values.Mean();
