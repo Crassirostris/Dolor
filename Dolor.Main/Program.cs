@@ -20,6 +20,7 @@ namespace Dolor.Main
             var secondSeriesData = ExtractSeriesData(args[1], dataExtractor);
             var mergesSeries = Merge(firstSeriesData, secondSeriesData);
             var overallStatistics = new OverallStatistics(mergesSeries);
+            overallStatistics.Evaluate();
             IResultRenderer renderer = ResultRendererProvider.Get();
             renderer.Render(overallStatistics);
         }
@@ -46,7 +47,7 @@ namespace Dolor.Main
             Console.WriteLine(string.Join(Environment.NewLine, new []
             {
                 "Usage:",
-                string.Format("{0} <first_series_files_list> <second_series_files_list>")
+                string.Format("{0} <first_series_files_list> <second_series_files_list>", Environment.GetCommandLineArgs()[0])
             }));
         }
     }
