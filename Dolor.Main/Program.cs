@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Dolor.Core;
@@ -46,7 +45,7 @@ namespace Dolor.Main
             Console.WriteLine(string.Join(Environment.NewLine, new []
             {
                 "Usage:",
-                string.Format("{0} <first_series_files_list> <second_series_files_list>")
+                string.Format("{0} <first_series_files_list> <second_series_files_list>", AppDomain.CurrentDomain.FriendlyName)
             }));
         }
     }

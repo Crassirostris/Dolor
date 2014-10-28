@@ -6,7 +6,7 @@ namespace Dolor.Main
     {
         public static IDataExtractor Get()
         {
-            throw new NotImplementedException();
+	        return new DataExtractor();
         }
     }
 }
