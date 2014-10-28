@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dolor.Core", "Dolor.Core\Dolor.Core.csproj", "{7C229A4A-2F49-409A-B010-3FFAA02A7CB8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dolor.Main", "Dolor.Main\Dolor.Main.csproj", "{BFECFDA5-2CFB-4381-B334-2EDD879F2343}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xls2Json", "Xls2Json\Xls2Json.csproj", "{1B36CF1D-F2AB-4362-8CEB-F0900C75F6B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +21,10 @@ Global
 		{BFECFDA5-2CFB-4381-B334-2EDD879F2343}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFECFDA5-2CFB-4381-B334-2EDD879F2343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFECFDA5-2CFB-4381-B334-2EDD879F2343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B36CF1D-F2AB-4362-8CEB-F0900C75F6B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B36CF1D-F2AB-4362-8CEB-F0900C75F6B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B36CF1D-F2AB-4362-8CEB-F0900C75F6B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B36CF1D-F2AB-4362-8CEB-F0900C75F6B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
