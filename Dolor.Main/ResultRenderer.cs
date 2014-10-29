@@ -25,8 +25,10 @@ namespace Dolor.Main
 				foreach (var parameter in overallStatistics.Parameters)
 				{
 					sheet.Cells[row, 1].Value = parameter.Key;
-					row += RenderGroup(sheet.Cells.Offset(row - 1, 2), parameter.Value.Item1, 
+					row += RenderGroup(sheet.Cells.Offset(row - 1, 2), parameter.Value.Item1,
 						overallStatistics.Pearson[parameter.Key], overallStatistics.Spearman[parameter.Key]).Rows;
+					row += RenderGroup(sheet.Cells.Offset(row - 1, 2), parameter.Value.Item2,
+						Enumerable.Empty<double>(), Enumerable.Empty<double>()).Rows;
 				}
 				package.Save();
 			}
