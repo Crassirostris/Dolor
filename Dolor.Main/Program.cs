@@ -19,6 +19,7 @@ namespace Dolor.Main
             var secondSeriesData = ExtractSeriesData(args[1], dataExtractor);
             var mergesSeries = Merge(firstSeriesData, secondSeriesData);
             var overallStatistics = new OverallStatistics(mergesSeries);
+            overallStatistics.Evaluate();
             IResultRenderer renderer = ResultRendererProvider.Get();
             renderer.Render(overallStatistics);
         }

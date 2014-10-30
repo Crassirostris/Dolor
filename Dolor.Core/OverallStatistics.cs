@@ -13,20 +13,31 @@ namespace Dolor.Core
 
         public Dictionary<string, double[]> Spearman { get; private set; }
 
+        public Dictionary<string, double[]> Ttest { get; private set; }
+
         public OverallStatistics(Dictionary<string, Tuple<double[][], double[][]>> parametersValues)
         {
             Parameters = new Dictionary<string, Tuple<Parameter, Parameter>>();
             Pearson = new Dictionary<string, double[]>();
             Spearman = new Dictionary<string, double[]>();
+        }
 
-            foreach (var kvp in parametersValues)
+        public void Evaluate()
+        {
+            foreach (var kvp in Parameters)
             {
-                Parameters[kvp.Key] = new Tuple<Parameter, Parameter>(new Parameter(kvp.Value.Item1), new Parameter(kvp.Value.Item2));
-                var values1 = Parameters[kvp.Key].Item1.Values;
-                var values2 = Parameters[kvp.Key].Item2.Values;
-                Pearson[kvp.Key] = values1.Zip(values2, (row1, row2) => Correlation.Pearson(row1.Values, row2.Values)).ToArray();
-                Spearman[kvp.Key] = values1.Zip(values2, (row1, row2) => Correlation.Spearman(row1.Values, row2.Values)).ToArray();
+                var values1 = kvp.Value.Item1.Values;
+                var values2 = kvp.Value.Item2.Values;
+
+                Pearson[kvp.Key] = CalculateSeriesRelation(values1, values2, Correlation.Pearson);
+                Spearman[kvp.Key] = CalculateSeriesRelation(values1, values2, Correlation.Spearman);
+                Ttest[kvp.Key] = CalculateSeriesRelation(values1, values2, DolorCorrelation.Ttest);
             }
+        }
+
+        private static double[] CalculateSeriesRelation(DataRowStatistics[] values1, DataRowStatistics[] values2, Func<double[], double[], double> relationFunc)
+        {
+            return values1.Zip(values2, (row1, row2) => relationFunc(row1.Values, row2.Values)).ToArray();
         }
     }
 }
