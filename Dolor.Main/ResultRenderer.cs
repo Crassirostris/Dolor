@@ -23,7 +23,7 @@ namespace Dolor.Main
 			{
 				var sheet = package.Workbook.Worksheets.Count > 0 ?
 					package.Workbook.Worksheets.First() :
-					package.Workbook.Worksheets.Add(Статистика" /*- хуистика*/);
+					package.Workbook.Worksheets.Add("Статистика" /*- хуистика*/);
 				int row = 6;
 				foreach (var parameter in overallStatistics.Parameters)
 				{
