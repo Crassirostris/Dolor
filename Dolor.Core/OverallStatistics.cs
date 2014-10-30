@@ -9,30 +9,28 @@ namespace Dolor.Core
     {
         public Dictionary<string, Tuple<Parameter, Parameter>> Parameters { get; private set; }
 
-        public Dictionary<string, double[]> Pearson { get; private set; }
+        public Dictionary<string, double[]> PValues { get; private set; }
 
-        public Dictionary<string, double[]> Spearman { get; private set; }
-
-        public Dictionary<string, double[]> Ttest { get; private set; }
-
-        public OverallStatistics(Dictionary<string, Tuple<double[][], double[][]>> parametersValues)
+        private OverallStatistics()
         {
             Parameters = new Dictionary<string, Tuple<Parameter, Parameter>>();
-            Pearson = new Dictionary<string, double[]>();
-            Spearman = new Dictionary<string, double[]>();
+            PValues = new Dictionary<string, double[]>();
         }
 
-        public void Evaluate()
+        public static OverallStatistics CreateNew(Dictionary<string, Tuple<double[][], double[][]>> parametersValues)
         {
-            foreach (var kvp in Parameters)
-            {
-                var values1 = kvp.Value.Item1.Values;
-                var values2 = kvp.Value.Item2.Values;
+            var overallStatistics = new OverallStatistics();
 
-                Pearson[kvp.Key] = CalculateSeriesRelation(values1, values2, Correlation.Pearson);
-                Spearman[kvp.Key] = CalculateSeriesRelation(values1, values2, Correlation.Spearman);
-                Ttest[kvp.Key] = CalculateSeriesRelation(values1, values2, DolorCorrelation.Ttest);
+            foreach (var kvp in parametersValues)
+            {
+                var parameterFromSeries1 = new Parameter(kvp.Value.Item1);
+                var parameterFromSeries2 = new Parameter(kvp.Value.Item2);
+
+                overallStatistics.Parameters[kvp.Key] = new Tuple<Parameter, Parameter>(parameterFromSeries1, parameterFromSeries2);
+                overallStatistics.PValues[kvp.Key] = CalculateSeriesRelation(parameterFromSeries1.Values, parameterFromSeries2.Values, DolorCorrelation.Ttest);
             }
+
+            return overallStatistics;
         }
 
         private static double[] CalculateSeriesRelation(DataRowStatistics[] values1, DataRowStatistics[] values2, Func<double[], double[], double> relationFunc)

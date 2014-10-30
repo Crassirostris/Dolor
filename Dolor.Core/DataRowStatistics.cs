@@ -8,6 +8,8 @@ namespace Dolor.Core
     {
         public double[] Values { get; private set; }
 
+        public double PValue { get; set; }
+
         public double Mean { get; private set; }
 
         public double Variance { get; private set; }

@@ -21,7 +21,7 @@ namespace Dolor.Core
                 int minuend = Math.Max(i, (i + 1) % values.Length);
                 int subtrahend = Math.Min(i, (i + 1) % values.Length);
                 Differences[i] = new DataRowStatistics(values[minuend].Zip(values[subtrahend], (left, right) => left - right));
-                RelativeDifferences[i] = new DataRowStatistics(values[minuend].Zip(values[subtrahend], (left, right) => (left - right) / right));
+                RelativeDifferences[i] = new DataRowStatistics(values[minuend].Zip(values[subtrahend], (left, right) => (left - right) / right * 100));
             }
         }
     }

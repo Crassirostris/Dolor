@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Dolor.Core;
 
 namespace Dolor.Main
@@ -17,9 +18,8 @@ namespace Dolor.Main
             IDataExtractor dataExtractor = DataExtractorProvider.Get();
             var firstSeriesData = ExtractSeriesData(args[0], dataExtractor);
             var secondSeriesData = ExtractSeriesData(args[1], dataExtractor);
-            var mergesSeries = Merge(firstSeriesData, secondSeriesData);
-            var overallStatistics = new OverallStatistics(mergesSeries);
-            overallStatistics.Evaluate();
+            var mergedSeries = Merge(firstSeriesData, secondSeriesData);
+            var overallStatistics = OverallStatistics.CreateNew(mergedSeries);
             IResultRenderer renderer = ResultRendererProvider.Get();
             renderer.Render(overallStatistics);
         }
@@ -27,7 +27,7 @@ namespace Dolor.Main
         private static Dictionary<string, Tuple<double[][], double[][]>> Merge(Dictionary<string, double[][]> first, Dictionary<string, double[][]> second)
         {
             var result = new Dictionary<string, Tuple<double[][], double[][]>>();
-            foreach (var key in first.Keys)
+            foreach (var key in first.Keys.Intersect(second.Keys))
                 result[key] = new Tuple<double[][], double[][]>(first[key], second[key]);
             return result;
         }
