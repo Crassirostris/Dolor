@@ -8,9 +8,10 @@ namespace Dolor.Main
 {
 	internal class ResultRenderer : IResultRenderer
 	{
-		public ResultRenderer(string resultsPath)
+		public ResultRenderer(string resultsPath, string templatePath)
 		{
 			this.resultsPath = resultsPath;
+			this.templatePath = templatePath;
 		}
 
 		public void Render(OverallStatistics overallStatistics)
@@ -18,17 +19,19 @@ namespace Dolor.Main
 			var fileInfo = new FileInfo(resultsPath);
 			if (fileInfo.Exists)
 				File.Delete(fileInfo.FullName);
-			using (var package = new ExcelPackage(fileInfo))
+			using (var package = new ExcelPackage(fileInfo, new FileInfo(templatePath)))
 			{
-				var sheet = package.Workbook.Worksheets.Add("Статистика" /*- хуистика*/);
+				var sheet = package.Workbook.Worksheets.Count > 0 ?
+					package.Workbook.Worksheets.First() :
+					package.Workbook.Worksheets.Add("Статистика" /*- хуистика*/);
 				int row = 6;
 				foreach (var parameter in overallStatistics.Parameters)
 				{
 					sheet.Cells[row, 1].Value = parameter.Key;
 					row += RenderGroup(sheet.Cells.Offset(row - 1, 2), parameter.Value.Item1,
-						overallStatistics.Pearson[parameter.Key], overallStatistics.Spearman[parameter.Key]).Rows;
-					row += RenderGroup(sheet.Cells.Offset(row - 1, 2), parameter.Value.Item2,
 						Enumerable.Empty<double>(), Enumerable.Empty<double>()).Rows;
+					row += RenderGroup(sheet.Cells.Offset(row - 1, 2), parameter.Value.Item2,
+						overallStatistics.Pearson[parameter.Key], overallStatistics.Spearman[parameter.Key]).Rows;
 				}
 				package.Save();
 			}
@@ -58,5 +61,6 @@ namespace Dolor.Main
 		}
 
 		private readonly string resultsPath;
+		private readonly string templatePath;
 	}
 }
