@@ -12,11 +12,14 @@ namespace Dolor.Core
 
         public double Variance { get; private set; }
 
+        public double StandardDeviation { get; set; }
+
         public DataRowStatistics(IEnumerable<double> values)
         {
             Values = values.ToArray();
             Mean = Values.Mean();
             Variance = Values.Variance();
+            StandardDeviation = Values.StandardDeviation();
         }
     }
 }

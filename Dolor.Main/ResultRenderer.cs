@@ -43,7 +43,8 @@ namespace Dolor.Main
 			{
 				parameter.Values.Select((e, i) => (object)("t=" + i)).ToArray(),
 				parameter.Values.Select(e => (object)e.Mean).ToArray(),
-				parameter.Values.Select(e => (object)e.Variance).ToArray(),
+				parameter.Values.Select(e => (object)e.StandardDeviation).ToArray(),
+				parameter.Values.Select(e => (object)(e.StandardDeviation / e.Mean * 100)).ToArray(),
 				new object[] {null}.Concat(parameter.Differences.Select(e => (object)e.Mean)).ToArray(),
 				new object[] {null}.Concat(parameter.Differences.Select(e => (object)e.Variance)).ToArray(),
 				new object[] {null}.Concat(parameter.RelativeDifferences.Select(e => (object)e.Mean)).ToArray(),
