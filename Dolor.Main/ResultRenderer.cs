@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Dolor.Core;
@@ -23,7 +23,7 @@ namespace Dolor.Main
 			{
 				var sheet = package.Workbook.Worksheets.Count > 0 ?
 					package.Workbook.Worksheets.First() :
-					package.Workbook.Worksheets.Add("Статистика" /*- хуистика*/);
+					package.Workbook.Worksheets.Add(РЎС‚Р°С‚РёСЃС‚РёРєР°" /*- С…СѓРёСЃС‚РёРєР°*/);
 				int row = 6;
 				foreach (var parameter in overallStatistics.Parameters)
 				{
